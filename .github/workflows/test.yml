@@ -1,0 +1,36 @@
+name: Test scripts
+
+on:
+  push:
+    branches-ignore: master
+  pull_request:
+    paths:
+    - src/data.js
+    - scripts/**
+    - package.json
+    - .github/workflows/**
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+        cache: npm
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Lint src/data.js
+      run: npm run lint
+
+    - name: Test scripts
+      run: npm test
