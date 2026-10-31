@@ -40,4 +40,4 @@ async function main() {
   await communicateValidationOutcome(errors, failedUrls, data);
 }
 
-main();
+main().catch((e) => core.setFailed(e.message || String(e)));

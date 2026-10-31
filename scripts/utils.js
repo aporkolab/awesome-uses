@@ -31,10 +31,14 @@ module.exports.getMasterData = async function () {
   if (curentBranchName !== 'master') {
     core.info('Executing action on branch different from master');
     await exec.exec('mv src/data.js src/tmpData.js', [], options);
-    await exec.exec('git fetch origin master', [], options);
-    await exec.exec('git restore --source=FETCH_HEAD src/data.js', [], options);
-    await exec.exec('mv src/data.js scripts/masterData.js', [], options);
-    await exec.exec('mv src/tmpData.js src/data.js', [], options);
+    try {
+      await exec.exec('git fetch origin master', [], options);
+      await exec.exec('git restore --source=FETCH_HEAD src/data.js', [], options);
+      await exec.exec('mv src/data.js scripts/masterData.js', [], options);
+    } finally {
+      // always put the working copy of `src/data.js` back, even if the fetch failed
+      await exec.exec('mv src/tmpData.js src/data.js', [], options);
+    }
   } else {
     core.info('Executing action on master branch');
   }
@@ -69,16 +73,9 @@ module.exports.Schema = Joi.object({
   tags: Joi.array().items(Joi.string()),
 });
 
-module.exports.getStatusCode = function (url) {
+module.exports.getStatusCode = function (url, { timeout = 10000 } = {}) {
   const client = url.startsWith('https') ? https : http;
   return new Promise((resolve, reject) => {
-    const REQUEST_TIMEOUT = 10000;
-    const timeoutId = setTimeout(
-      reject,
-      REQUEST_TIMEOUT,
-      new Error('Request timed out')
-    );
-
     // Some hosts (Cloudflare, Caddy, etc.) block requests that don't send a
     // browser-like User-Agent, returning a 403 even though the page is live.
     // Send one so we don't produce false-positive failures for those sites.
@@ -89,12 +86,21 @@ module.exports.getStatusCode = function (url) {
       },
     };
 
-    client
-      .get(url, requestOptions, (res) => {
-        clearTimeout(timeoutId);
-        resolve(res.statusCode);
-      })
-      .on('error', (err) => reject(err));
+    const request = client.get(url, requestOptions, (res) => {
+      clearTimeout(timeoutId);
+      // drain the body so the socket is released
+      res.resume();
+      resolve(res.statusCode);
+    });
+    request.on('error', (err) => {
+      clearTimeout(timeoutId);
+      reject(err);
+    });
+
+    // abort the request on timeout, otherwise the open socket keeps the process alive
+    const timeoutId = setTimeout(() => {
+      request.destroy(new Error('Request timed out'));
+    }, timeout);
   });
 };
 
