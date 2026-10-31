@@ -471,7 +471,7 @@ This readme is auto-generated from the data.js file, so please don't PR this fil
 * [Luke Hsiao](https://luke.hsiao.dev/uses/) — Software engineer and blogger
 * [Elijah Rwothoromo](https://rwothoromo.wordpress.com/2020/05/29/uses/) — Software Developer, Poet, code and play!
 * [davidak](https://davidak.de/uses/) — Creating Free Software, with a focus on QA.
-* [Sudhanshbajaj.com/uses/) — Code. Travel. Sleep. Repeat. Magento Developer
+* [Sudhanshu Bajaj](https://www.sudhanshubajaj.com/uses/) — Code. Travel. Sleep. Repeat. Magento Developer
 * [Jack Jackson](https://blog.scubbo.org/uses/) — I make things to help people do things
 * [Dhanish Gajjar](https://dhanishgajjar.com/uses) — Developer
 * [Ricardo Morais](https://ricardomorais.dev/uses) — Senior Front-end Developer, Software Engineer @ Nextbitt
@@ -907,7 +907,7 @@ This readme is auto-generated from the data.js file, so please don't PR this fil
 * [Juan Fernandes](https://www.juanfernandes.uk/uses/) — Freelance Front-end Developer
 * [Neil Merton](https://neil.merton.dev/about/uses) — Front-end developer: SaaS, product-focused UI problem solver.
 * [Kevin Simkanič](https://github.com/kevinko12323/uses) — Wordpress ninja 😎 React lover ❤️ CSS master 🧐
-* [Lakshmipriya Mukundan](https://gist.github.com/lakshmipriyamukundan/ddd224306ce962f4f159f1065f0f0c67) — Javascript lover, Furent), Pet lover
+* [Lakshmipriya Mukundan](https://gist.github.com/lakshmipriyamukundan/ddd224306ce962f4f159f1065f0f0c67) — Javascript lover, FullStack enthusiast, React Learner (current), Pet lover
 * [Jeremy Bunting](https://qbunt.com/uses) — Web 🤖 working remotely from the Connecticut burbs
 * [Chris Wiegman](https://chriswiegman.com/uses) — VP of Engineering, developer, teacher, and blogger building teams and products focused on humane and sustainable technology.
 * [Sérgio Santos](https://s3rgiosan.com/uses) — Lead Engineer. AI, WordPress, PHP, JavaScript, TypeScript.
