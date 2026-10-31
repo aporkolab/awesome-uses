@@ -45,7 +45,9 @@
   "scripts": {
     "build": "netlify build",
     "dev": "NODE_ENV=development netlify dev",
-    "readme": "node ./scripts/populate-readme.js"
+    "readme": "node ./scripts/populate-readme.js",
+    "test": "node --test scripts/tests/*.test.js",
+    "lint": "eslint src/data.js"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",

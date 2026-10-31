@@ -40,3 +40,16 @@ Include the hardware you use, such as your computer and other related equipment.
 * Ensure the code submitted is formatted similarly to existing code
 * Ensure variable, method, function, and component names are clear and concise
 
+
+## Checking Your Changes Locally
+
+Requires Node.js 22 (the version the GitHub Actions use) and npm.
+
+```sh
+npm install      # install dependencies
+npm run lint     # lint src/data.js (the same check CI runs)
+npm test         # run the script tests in scripts/tests
+npm run readme   # regenerate the list into generated-readme.md
+```
+
+`node ./scripts/data-validate.js` runs the same validation as the PR check: it validates the entries that are new compared to `master` against the schema in `scripts/utils.js` and pings their URLs. `GITHUB_TOKEN` is read from the environment only to report the result on a pull request; it is optional locally.

@@ -11,7 +11,7 @@ export default function Person({ person }) {
     : null;
   const website = `https://unavatar.io/${url.host}`;
   const unavatar = person.twitter
-    ? `${twitter}?fallback=${website}&ttl=28d`
+    ? `${twitter}?fallback=${website}`
     : website;
   const [_, mastodonHandle, mastodonServer] = person.mastodon?.split('@') || [];
   const { tag: currentTag } = useParams();
@@ -90,20 +90,6 @@ export default function Person({ person }) {
           </div>
         )}
 
-        {/* If they have a bluesky, and no twitter/mastodon, show that */}
-        {person.bluesky && !person.twitter && (
-          <div className="SocialHandle">
-            <a
-              href={`https://bsky.app/profile/${person.bluesky.replace("@", "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="at">@</span>
-              {person.bluesky.substring(1)}
-            </a>
-          </div>
-        )}
-
         {/* If they have a mastodon, and no twitter, show that */}
         {person.mastodon && !person.twitter && !person.bluesky && (
           <div className="SocialHandle">
@@ -121,12 +107,12 @@ export default function Person({ person }) {
         {/* If they have a bluesky, and no mastodon and no twitter, show that */}
         {person.bluesky && !person.mastodon && !person.twitter && (
           <div className="SocialHandle">
-            <a href={`https://bsky.app/profile/${person.bluesky}`}
+            <a href={`https://bsky.app/profile/${person.bluesky.replace("@", "")}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <span className="at">@</span>
-              {person.bluesky}
+              {person.bluesky.replace("@", "")}
             </a>
           </div>
         )}
